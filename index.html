@@ -84,6 +84,22 @@
         .srv h4 { font-size: 15px; margin-bottom: 4px; color: #1a1a1a; }
         .srv p { font-size: 12px; color: #888; }
 
+        /* معرض الأعمال */
+        .slideshow {
+            max-width: 600px; margin: 0 auto 20px;
+            position: relative; border-radius: 16px; overflow: hidden;
+            border: 3px solid #1a1a1a; box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .slide { width: 100%; display: none; }
+        .slide.active { display: block; }
+        .slideshow button {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.5); color: #fff; border: none;
+            font-size: 22px; padding: 10px 14px; cursor: pointer; border-radius: 8px;
+        }
+        .slideshow .prev { left: 10px; }
+        .slideshow .next { right: 10px; }
+
         .steps { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
         .step {
             background: #fff; border: 1px solid #e8e0d0;
@@ -214,7 +230,21 @@
         </div>
     </div>
 
-    <div class="section" id="steps">
+    <div class="section" id="works">
+        <h2>أعمال<span>نا</span></h2>
+        <p class="sub">شوف النتائج بعينيك</p>
+        <div class="slideshow">
+            <img src="work1.jpg" class="slide active" alt="حلاقة 1">
+            <img src="work2.jpg" class="slide" alt="حلاقة 2">
+            <img src="work3.jpg" class="slide" alt="حلاقة 3">
+            <img src="work4.jpg" class="slide" alt="حلاقة 4">
+            <button class="prev" onclick="changeSlide(1)">❮</button>
+            <button class="next" onclick="changeSlide(-1)">❯</button>
+        </div>
+        <p style="color:#888; font-size:13px;">📸 الصور من أعمالنا الحقيقية</p>
+    </div>
+
+    <div class="section" id="steps" style="background:#fff;">
         <h2>كيفاش <span>كنجيو</span>؟</h2>
         <p class="sub">5 خطوات وبس!</p>
         <div class="steps">
@@ -226,7 +256,7 @@
         </div>
     </div>
 
-    <div class="section" style="background:#fff;">
+    <div class="section">
         <h2>أراء <span>زبنائنا</span></h2>
         <div class="reviews">
             <div class="rev"><div class="stars">★★★★★</div><h5>ياسين من فاس</h5><p>"خدمة رائعة، احترافية وهادية. جاء عندي للدار فالوقت المحدد. أنصح بها بشدة."</p></div>
@@ -256,6 +286,18 @@
         <a class="btn-hero" href="https://wa.me/212628025220">💬 واتساب — متوفر للحجز</a>
         <p>© 2026 HOME BARBER — فاس | جميع الحقوق محفوظة</p>
     </footer>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        function changeSlide(d) { showSlide(currentSlide + d); }
+        setInterval(() => changeSlide(1), 3000);
+    </script>
 
 </body>
 </html>
